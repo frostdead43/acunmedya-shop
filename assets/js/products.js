@@ -523,7 +523,9 @@ filterForm.addEventListener('submit', handleSubmit);
 function render() {
   productList.innerHTML = "";
   for (const product of products) {
-    if (product.title.toLocaleLowerCase('en').includes(filteredText)) {
+    if (product.title.toLocaleLowerCase('en').includes(filteredText)||
+      product.description.toLocaleLowerCase('en').includes(filteredText)||
+      product.category.toLocaleLowerCase('en').includes(filteredText)) {
       productList.innerHTML += `  
         <li class="card">
           <img src="${product.thumbnail}">
