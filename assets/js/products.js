@@ -507,23 +507,43 @@ products = [
   }
 ]
 
-
+const filterForm = document.getElementById('filterForm');
+let filteredText = "";
 const productList = document.querySelector(".products-area");
-console.log (productList);
 
-
-for(product of products) {
-  productList.innerHTML += `  
-  <div class="card">
-    <img src="${product.thumbnail}">
-    <h4>${product.title}</h4>
-    <h4>${product.category}</h4>
-    <p>${product.description}</p>
-    <div class="price-stock"> Price: ${product.price} -  Stock: ${product.stock}</div>
-    <div class="tags"># ${product.tags}</div>
-  </div>`
+function handleSubmit(e) {
+  e.preventDefault();
+  filteredText = filterForm.filteredText.value.toLocaleLowerCase('en');
+  render();
 }
 
+filterForm.addEventListener('submit', handleSubmit);
+
+function getProductTagsHtml(tags) {
+  let tagsHtml = '';
+  for (const tag of tags) {
+    tagsHtml += `<li>${tag}</li>`;
+  }
+  return tagsHtml;
+}
+
+function render() {
+  productList.innerHTML = "";
+  for (const product of products) {
+    if (product.title.toLocaleLowerCase('en').includes(filteredText)) {
+      productList.innerHTML += `  
+        <li class="card">
+          <img src="${product.thumbnail}">
+          <h4>${product.title}</h4>
+          <h4>${product.category}</h4>
+          <p>${product.description}</p>
+          <div class="price-stock"> Price: ${product.price} -  Stock: ${product.stock}</div>
+          <ul class="product-tags">${getProductTagsHtml(product.tags)}</ul>
+        </li>`;
+    }
+  }
+}
+render();
 
 
 
