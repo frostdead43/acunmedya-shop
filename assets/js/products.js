@@ -519,13 +519,6 @@ function handleSubmit(e) {
 
 filterForm.addEventListener('submit', handleSubmit);
 
-function getProductTagsHtml(tags) {
-  let tagsHtml = '';
-  for (const tag of tags) {
-    tagsHtml += `<li>${tag}</li>`;
-  }
-  return tagsHtml;
-}
 
 function render() {
   productList.innerHTML = "";
@@ -538,7 +531,7 @@ function render() {
           <h4>${product.category}</h4>
           <p>${product.description}</p>
           <div class="price-stock"> Price: ${product.price} -  Stock: ${product.stock}</div>
-          <ul class="product-tags">${getProductTagsHtml(product.tags)}</ul>
+          <div class="product-tags">${product.tags}</div>
         </li>`;
     }
   }
